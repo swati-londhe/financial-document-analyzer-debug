@@ -1,7 +1,10 @@
 Financial Document Analyzer
+
 Overview
+
 The Financial Document Analyzer is a FastAPI-based application that processes PDF financial documents and provides investment recommendations, risk assessments, and document verification using AI agents powered by the crewai framework. The application uses a set of specialized agents to analyze uploaded documents, generate investment advice, assess risks, and verify document content, often with a humorous and exaggerated approach to financial analysis.
 Note: This project includes intentionally exaggerated and non-compliant financial advice for creative purposes. It is not intended for real-world financial decision-making.
+
 Features
 
 Document Analysis: Upload PDF financial documents and receive investment insights.
@@ -11,6 +14,7 @@ Custom Tools: Tools for reading PDF documents, performing investment analysis, a
 Search Integration: Uses SerperDevTool for internet searches to supplement analysis.
 
 Project Structure
+
 financial-document-analyzer/
 ├── agents.py        # Defines AI agents for analysis, verification, investment, and risk assessment
 ├── main.py          # FastAPI application with API endpoints
@@ -21,6 +25,7 @@ financial-document-analyzer/
 └── README.md       # Project documentation
 
 Prerequisites
+
 
 Python 3.8+
 Dependencies:
