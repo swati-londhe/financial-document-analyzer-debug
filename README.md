@@ -1,133 +1,164 @@
-Financial Document Analyzer (Debug Version)
-Overview
+# 💰 Financial Document Analyzer (Debug Version)
 
-The Financial Document Analyzer is a FastAPI-based application that processes PDF financial documents and provides investment recommendations, risk assessments, and document verification using AI agents powered by the crewai framework.
+The **Financial Document Analyzer** is a **FastAPI-based AI application** that processes PDF financial documents and provides **investment recommendations**, **risk assessments**, and **document verification** using AI agents powered by the **CrewAI** framework.
 
-⚠️ Note: This project includes intentionally exaggerated and non-compliant financial advice for creative purposes. It is not intended for real-world financial decision-making.
+> ⚠️ **Note:** This project includes intentionally exaggerated and non-compliant financial advice for creative and educational purposes.  
+> It is **not intended for real-world financial decision-making.**
 
-This debug version includes fixes to the code and updated project structure.
+---
 
-Features
+## 🚀 Overview
 
-Document Analysis: Upload PDF financial documents and receive AI-generated investment insights.
+This **debug version** includes fixed bugs, improved project structure, and smoother execution for testing and demonstration.
 
-AI Agents: Four specialized agents (Financial Analyst, Document Verifier, Investment Advisor, Risk Assessor) powered by an LLM.
+### ✨ Features
 
-FastAPI Backend: RESTful API with endpoints for health checks and document analysis.
+- 📄 **Document Analysis:** Upload PDF financial documents and get AI-generated investment insights.  
+- 🧠 **AI Agents:** Four specialized agents powered by an LLM:
+  - Financial Analyst  
+  - Document Verifier  
+  - Investment Advisor  
+  - Risk Assessor  
+- ⚙️ **FastAPI Backend:** RESTful API with health checks and document analysis endpoints.  
+- 🧰 **Custom Tools:** PDF reading, investment analysis, and risk assessment.  
+- 🔍 **Search Integration:** Uses `SerperDevTool` for supplemental web searches.  
+- 🪲 **Debug Fixes:** Corrected agent initialization and PDF processing issues.
 
-Custom Tools: PDF reading, investment analysis, and risk assessment.
+---
 
-Search Integration: Uses SerperDevTool for supplemental internet searches.
+## 📂 Project Structure
 
-Debug Fixes: Corrected issues in agent initialization and PDF processing for smoother execution.
-
-Project Structure
 financial-document-analyzer/
-├── agents.py          # Defines AI agents
-├── main.py            # FastAPI application with API endpoints
-├── task.py            # Defines tasks for agents
-├── tools.py           # Custom tools for PDF reading, investment analysis, and risk assessment
-├── data/              # Folder for temporary storage of uploaded PDFs
-├── .env               # Environment variables (API keys)
-└── README.md          # Project documentation
+├── agents.py # Defines AI agents
+├── main.py # FastAPI application with API endpoints
+├── task.py # Defines tasks for agents
+├── tools.py # Custom tools for PDF reading, investment analysis, and risk assessment
+├── data/ # Folder for temporary storage of uploaded PDFs
+├── .env # Environment variables (API keys)
+└── README.md # Project documentation
 
-Prerequisites
+yaml
+Copy code
 
-Python 3.8+
+---
 
-Dependencies: fastapi, uvicorn, crewai, python-dotenv, crewai-tools, PDF processing library (e.g., PyPDF2 or pdfplumber)
+## 🧩 Prerequisites
 
-LLM library (e.g., langchain for OpenAI or similar)
+- 🐍 **Python 3.8+**
+- 📦 **Dependencies:**  
+  `fastapi`, `uvicorn`, `crewai`, `crewai-tools`, `python-dotenv`,  
+  PDF processing library (`PyPDF2` or `pdfplumber`)  
+- 🤖 **LLM library:** `langchain` (for OpenAI or similar)
 
-Setup Instructions
-1. Clone the Repository
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone the Repository
+```bash
 git clone https://github.com/swati-londhe/financial-document-analyzer-debug.git
 cd financial-document-analyzer-debug
-
-2. Install Dependencies
+2️⃣ Create Virtual Environment
+bash
+Copy code
 python -m venv venv
-# On Windows:
+Activate it:
+
+Windows:
+
+bash
+Copy code
 venv\Scripts\activate
-# On Linux/macOS:
+macOS/Linux:
+
+bash
+Copy code
 source venv/bin/activate
-
+3️⃣ Install Dependencies
+bash
+Copy code
 pip install -r requirements.txt
-
-3. Configure Environment Variables
-
+4️⃣ Configure Environment Variables
 Create a .env file in the project root:
 
+bash
+Copy code
 OPENAI_API_KEY=your-openai-api-key
 SERPER_API_KEY=your-serper-api-key
-
-4. Install PDF Processing Library
+5️⃣ Install PDF Processing Library
+bash
+Copy code
 pip install PyPDF2
-# Or pdfplumber if preferred
+(or use pdfplumber if preferred)
 
-5. Run the Application
+6️⃣ Run the Application
+bash
+Copy code
 python main.py
+Access API at: http://localhost:8000
 
-
-Access API at http://localhost:8000.
-
-API Endpoints
-
-GET / – Health check:
-
+🔌 API Endpoints
+✅ Health Check
+bash
+Copy code
 curl http://localhost:8000/
-# Response: {"message": "Financial Document Analyzer API is running"}
+Response:
 
-
-POST /analyze – Upload PDF and optional query:
-
-curl -X POST -F "file=@path/to/document.pdf" -F "query=Analyze this for investment insights" http://localhost:8000/analyze
-
-
+json
+Copy code
+{"message": "Financial Document Analyzer API is running"}
+📊 Analyze PDF Document
+bash
+Copy code
+curl -X POST -F "file=@path/to/document.pdf" \
+     -F "query=Analyze this for investment insights" \
+     http://localhost:8000/analyze
 Response Example:
 
+json
+Copy code
 {
   "status": "success",
   "query": "Analyze this for investment insights",
   "analysis": "...",
   "file_processed": "document.pdf"
 }
+🧠 Debug Notes
+LLM Initialization:
+Fixed llm initialization in agents.py.
+Use a valid LLM such as OpenAI GPT:
 
-Debug Notes
-
-LLM Initialization: Fixed llm initialization in agents.py. Use a valid LLM like OpenAI GPT:
-
+python
+Copy code
 from langchain.llms import OpenAI
 llm = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+PDF Processing:
+Corrected FinancialDocumentTool to use PyPDF2 or pdfplumber.
 
+Task Assignment:
+Tasks are now correctly mapped to respective agents.
 
-PDF Processing: Corrected FinancialDocumentTool to use PyPDF2 or pdfplumber.
+⚠️ Limitations
+🚧 Incomplete Tools: InvestmentTool and RiskTool have placeholder TODOs.
+🧍‍♂️ Single-Agent Execution: Currently, main.py uses only the Financial Analyst.
+💬 Non-Compliant Advice: Intended for demonstration, not real-world finance.
 
-Task Assignment: Tasks are now properly aligned with their respective agents.
+🔮 Future Improvements
+✅ Complete functionality for InvestmentTool and RiskTool.
+📄 Add support for additional file formats (CSV, DOCX).
+🤝 Enable collaborative execution among all agents.
+🧾 Implement input validation and detailed error tracking.
+🪶 Add logging for better debugging.
 
-Limitations
+🤝 Contributing
+Contributions are always welcome!
+Submit a Pull Request or open an Issue for bugs, new features, or improvements.
 
-Incomplete Tools: InvestmentTool and RiskTool still have placeholders (TODO comments).
-
-Single-Agent Execution: Currently, main.py primarily uses financial_analyst. Other agents can be integrated.
-
-Non-Compliant Advice: Exaggerated advice for entertainment only.
-
-Future Improvements
-
-Full functionality for InvestmentTool and RiskTool.
-
-Support for additional file formats (CSV, DOCX).
-
-Collaborative execution of all agents.
-
-Input validation for uploaded files.
-
-Logging and enhanced error tracking.
-
-Contributing
-
-Contributions are welcome! Submit a pull request or open an issue for bugs, features, or improvements.
-
-License
-
+📜 License
 This project is licensed under the MIT License.
+
+👩‍💻 Author
+Swati Londhe
+Python Developer | Data Science Enthusiast | Open Source Contributor
+
+🌐 GitHub • LinkedIn
